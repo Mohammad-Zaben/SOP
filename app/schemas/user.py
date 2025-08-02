@@ -12,7 +12,7 @@ class UserBase(BaseModel):
     """Base user schema with common fields"""
     username: str = Field(min_length=3, max_length=50)
     email: Optional[EmailStr] = None
-    phone: Optional[str] = Field(None, regex=r"^05\d{8}$")  # Phone format: 0597865441
+    phone: Optional[str] = Field(None, pattern=r"^05\d{8}$")  # Phone format: 0597865441
     shop_type: str = Field(min_length=1, max_length=100)
     location: Optional[str] = Field(None, max_length=200)
 
@@ -30,16 +30,16 @@ class UserRead(UserBase):
     created_at: datetime
     
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class UserUpdate(BaseModel):
     """Schema for updating user data (partial update)"""
     email: Optional[EmailStr] = None
-    phone: Optional[str] = Field(None, regex=r"^05\d{8}$")
+    phone: Optional[str] = Field(None, pattern=r"^05\d{8}$")
     shop_type: Optional[str] = Field(None, min_length=1, max_length=100)
     location: Optional[str] = Field(None, max_length=200)
-    status: Optional[str] = Field(None, regex=r"^(active|suspended|banned)$")
+    status: Optional[str] = Field(None, pattern=r"^(active|suspended|banned)$")
     
     @validator('status')
     def validate_status(cls, v):

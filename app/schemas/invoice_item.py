@@ -21,4 +21,4 @@ class InvoiceItemRead(InvoiceItemBase):
     """Schema for reading invoice item data (response model)"""
     
     class Config:
-        orm_mode = True
+        from_attributes = True

@@ -28,4 +28,4 @@ class InvoiceRead(InvoiceBase):
     items: List[InvoiceItemRead]
     
     class Config:
-        orm_mode = True
+        from_attributes = True
